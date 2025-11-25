@@ -11,7 +11,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
 ## Partition
     
-    Send `dfdisk /dev/sda` them specify gpt.
+    Send `dfdisk /dev/nvme0n1` them specify gpt.
     Select [New], set the size to 1G and confirm.
     Move down to create a second.
     Select [New] again and confirm the default size, which is the remainder of the drive.
@@ -20,11 +20,11 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
 ## Encryption
 
-    Send `cryptsetup -v luksFormat /dev/sda2`
+    Send `cryptsetup -v luksFormat /dev/nvme0n1p2`
     Send `YES`
     Specify a password
 
-    Send `cryptsetup open /dev/sda2 cryptroot`
+    Send `cryptsetup open /dev/nvme0n1p2 cryptroot`
     Enter password
 
     confirm with `lsblk. Should look something like this.
@@ -32,9 +32,9 @@ It's meant to be extremely low resource demanding while being able to pack all t
     ❯ lsblk
     NAME           MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
     loop 0           7:0    0 782.3M  1 loop /run/artix/sfs/rootfs
-    sda              8:0    0    83G  0 disk 
-    ├──sda1          8:1    0     1G  0 part
-    └──sda2          8:2    0    82G  0 part
+    nvme0n1              8:0    0    83G  0 disk 
+    ├──nvme0n1p1          8:1    0     1G  0 part
+    └──nvme0n1p2          8:2    0    82G  0 part
       └──cryptroot 254:0    0    82G  0 crypt
     sr0             11:0    1 992.1M  0 rom   /run/artix/bootmnt
 
@@ -44,17 +44,17 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
     mount /dev/mapper/cryptroot /mnt
     mkdir /mnt/boot
-    mkfs.fat -F 32 /dev/sda1
-    mount /dev/sda1 /mnt/boot
+    mkfs.fat -F 32 /dev/nvme0n1p1
+    mount /dev/nvme0n1p1 /mnt/boot
     
     confirm with `lsblk. Should look something like this.
 
     ❯ lsblk
     NAME           MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
     loop 0           7:0    0 782.3M  1 loop /run/artix/sfs/rootfs
-    sda              8:0    0    83G  0 disk 
-    ├──sda1          8:1    0     1G  0 part /mnt/boot
-    └──sda2          8:2    0    82G  0 part
+    nvme0n1              8:0    0    83G  0 disk 
+    ├──nvme0n1p1          8:1    0     1G  0 part /mnt/boot
+    └──nvme0n1p2          8:2    0    82G  0 part
       └──cryptroot 254:0    0    82G  0 crypt /mnt
     sr0             11:0    1 992.1M  0 rom   /run/artix/bootmnt
 
@@ -125,7 +125,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
 ## Install bootloader
 
-    grub-install --efi-directory=/boot --bootloader-id=artix /dev/sda
+    grub-install --efi-directory=/boot --bootloader-id=artix /dev/nvme0n1
 
 ## Install setup GRUB to handle encrypted device at boot
 
@@ -133,7 +133,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
     Next we'll add a placeholder for a UUID we'll insert afterwards
     modify line near top `GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet", to "loglevel=3 quiet cryptdevice=UUID=LUKS_UUID_HERE:cryptroot root=UUID=ROOT_UUID_HERE"
 
-    set -i "s|LUKS_UUID_HERE|$(blkid -o value -s UUID /dev/sda2)|" /etc/default/grub
+    set -i "s|LUKS_UUID_HERE|$(blkid -o value -s UUID /dev/nvme0n1p2)|" /etc/default/grub
     sed -i "s|ROOT_UUID_HERE|$(blkid -o value -s UUID /dev/mapper/cryptroot)|" /etc/default/grub
 
     confirm everything looks alright by looking at `nano /etc/default/grub`.
@@ -169,22 +169,16 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
     scroll down and make sure [galaxy], [world] and [lib32] is uncommented working.
 
-    Send `sudo pacman -Sy git` to unlock all the goodies.
-
-## Some goodies
-
-    sudo pacman -S trizen git fish
-    sudo trizen -S brave
-
-## Graphics
-
+    sudo pacman -Sy 
+    sudo pacman -S git librewolf git fish nvidia nvidia-utils ` to unlock all the goodies.
     sudo chsh -s /usr/bin/fish lojith # set shell
-    sudo pacman -S nvidia nvidia-utils 
     
 ## Display server stuff
 
     sudo pacman -S xlibre-xserver xlibre-xserver-{common,devel,xvfb} xlibre-xf86-video-{amdgpu,vesa,fbdev,ati,dummy} xlibre-xf86-input-{libinput.evdev,vmmouse}
-    sudo pacman -S xorg-{xinit,xmodmap,xrandr,xsetroot,xprop}
+
+    #err, you sure?
+    #sudo pacman -S xorg-{xinit,xmodmap,xrandr,xsetroot,xprop}
 
 ## Window Manager stuff
 
@@ -217,7 +211,3 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
     login
     xstart # to start wm
-
-## Tool stuff
-
-    
