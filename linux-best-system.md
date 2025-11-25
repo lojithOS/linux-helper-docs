@@ -2,7 +2,7 @@ This is an installation guide for what I hope will be the best possible linux sy
 It's meant to be extremely low resource demanding while being able to pack all the punches of high-end systems.
 
     OS: Artix x86_64
-    Init Sys: runit
+    Init Sys: s6
     Kernel: Linux
     Shell: Fish
     WM: dwm
@@ -31,7 +31,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
     ❯ lsblk
     NAME           MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
-    loop 0           7:0    0 782.3M  1 loop /run/artix/sfs/rootfs
+    loop 0           7:0    0 782.3M  1 loop /run//sfs/rootfs
     nvme0n1              8:0    0    83G  0 disk 
     ├──nvme0n1p1          8:1    0     1G  0 part
     └──nvme0n1p2          8:2    0    82G  0 part
@@ -170,7 +170,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
     scroll down and make sure [galaxy], [world] and [lib32] is uncommented working.
 
     sudo pacman -Sy 
-    sudo pacman -S git librewolf git fish nvidia nvidia-utils nvidia-settings ` to unlock all the goodies.
+    sudo pacman -S git librewolf fish nvidia nvidia-utils nvidia-settings
     sudo chsh -s /usr/bin/fish lojith # set shell
     
 ## Display server stuff
