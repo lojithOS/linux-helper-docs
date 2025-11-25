@@ -170,7 +170,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
     scroll down and make sure [galaxy], [world] and [lib32] is uncommented working.
 
     sudo pacman -Sy 
-    sudo pacman -S git librewolf git fish nvidia nvidia-utils ` to unlock all the goodies.
+    sudo pacman -S git librewolf git fish nvidia nvidia-utils nvidia-settings ` to unlock all the goodies.
     sudo chsh -s /usr/bin/fish lojith # set shell
     
 ## Display server stuff
@@ -210,7 +210,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
     reboot
 
     login
-    startx # to start wm
+    sudo startx # to start wm
     # s6-svc -u ~/.s6/services/dwm
 
     # Create the directory for the service
