@@ -5,9 +5,9 @@ It's meant to be extremely low resource demanding while being able to pack all t
     Init Sys: runit
     Kernel: Linux
     Shell: Fish
-    WM: csm (calm window manager)
+    WM: dwm
     Display Server: XLibre
-    Terminal: stw
+    Terminal: st
 
 ## Partition
     
@@ -44,7 +44,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
     mount /dev/mapper/cryptroot /mnt
     mkdir /mnt/boot
-    mkfs.far -F 32 /dev/sda1
+    mkfs.fat -F 32 /dev/sda1
     mount /dev/sda1 /mnt/boot
     
     confirm with `lsblk. Should look something like this.
@@ -173,8 +173,13 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
 ## Some goodies
 
-    sudo pacman -S trizen
-    sudo trizen -S brave git
+    sudo pacman -S trizen git fish
+    sudo trizen -S brave
+
+## Graphics
+
+    sudo chsh -s /usr/bin/fish lojith # set shell
+    sudo pacman -S nvidia nvidia-utils 
     
 ## Display server stuff
 
