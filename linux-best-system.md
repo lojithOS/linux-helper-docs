@@ -60,10 +60,12 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
 ## Begin installing system
 
+    # if you find you don't have internet send `s6-rc -u change dhcpcd-srv`
+
     basestrap /mnt base base_devel s6-base elogind-s6
     [Enter]
     Wait a while...
-    basestrap /mnt linux linux-firmware sof-firmware grub efibootmgr networkmanager networkmanager-s6 nano 
+    basestrap /mnt linux linux-firmware sof-firmware grub efibootmgr networkmanager networkmanager-s6 network-manager-applet dosfstools linux-headers nano 
     [Enter]
     Wait a while...
     Congrats, Linux is officially installed.
@@ -71,6 +73,16 @@ It's meant to be extremely low resource demanding while being able to pack all t
     [Enter]
     Make the mount permanent with `fstabgen -U /mnt >> /mnt/etc/fstab`
     artix-chroot /mnt
+
+## adding swap file
+
+    dd if=/dev/zero of=/swapfile bs=1G count=2 status=progress
+    chmod 600 /swapfile
+    mkswap /swapfile
+    swapon /swapfile
+
+    nano /etc/fstab
+    add `/swapfile none swap default 0 0` at the bottom of the file.
 
 ## Setting up system
 
@@ -128,6 +140,10 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
     grub-mkconfig -o /boot/grub/grub.cfg
 
+## Enable network manager now (if for whatever reason it's not active)
+
+    s6-rc -u change NetworkManager
+
 ## Enable network manager on boot
 
     sudo pacman -S iproute2 ethtool openvpn networkmanager-openvpn networkmanager-vpn-plugin-openvpn
@@ -135,6 +151,8 @@ It's meant to be extremely low resource demanding while being able to pack all t
     touch /etc/s6/adminsv/default/contents.d/networkmanager
     touch /etc/s6/adminsv/default/contents.d/elogind
     s6-db-reload
+    # alternatively, do on local user
+    s6-rc-bundle add default NetworkManager elogind
 
 ## Unlocking goodies
 
