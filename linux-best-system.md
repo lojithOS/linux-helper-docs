@@ -131,4 +131,16 @@ It's meant to be extremely low resource demanding while being able to pack all t
 ## Enable network manager on boot
 
     sudo pacman -S iproute2 ethtool openvpn networkmanager-openvpn networkmanager-vpn-plugin-openvpn
+    # Don't panic if this doesn't work.
+    touch /etc/s6/adminsv/default/contents.d/networkmanager
+    touch /etc/s6/adminsv/default/contents.d/elogind
+    s6-db-reload
+
+# The fun bit
+
+    su lojith
+
+    
+
+
     
