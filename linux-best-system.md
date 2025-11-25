@@ -153,6 +153,11 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
     Send `sudo pacman -Sy git` to unlock all the goodies.
 
+## Some goodies
+
+    sudo pacman -S trizen
+    sudo trizen -S brave git
+    
 ## Display server stuff
 
     sudo pacman -S xlibre-xserver xlibre-xserver-{common,devel,xvfb} xlibre-xf86-video-{amdgpu,vesa,fbdev,ati,dummy} xlibre-xf86-input-{libinput.evdev,vmmouse}
@@ -178,8 +183,18 @@ It's meant to be extremely low resource demanding while being able to pack all t
     cd ~
 
     # set dwm startup on boot
+    touch .xinitrc
+    echo 'exec dwm' >> .xinitrc
+
+    exit # exit lojith
+    exit # exit into live cd
+    lsblk
+    unmount -a
+    reboot
+
+    login
+    xstart # to start wm
 
 ## Tool stuff
 
-    sudo trizen -S brave git
     
