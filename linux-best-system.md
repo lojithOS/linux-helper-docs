@@ -60,3 +60,9 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
 ## Begin installing system
 
+    basestrap /mnt base base_devel openrc elogind-openrc
+    [Enter]
+
+    Wait a while...
+
+    basestrap /mnt linux linux-firmware sof-firmware grub efibootmgr networkmanager networkmanager-openrc nano neofetch 
