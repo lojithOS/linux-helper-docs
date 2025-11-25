@@ -140,6 +140,19 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
     su lojith
 
+    sudo nano /etc/pacman.conf
+    uncomment UseSyslog, Color, VerbosepkgLists, ParallelDownloads. Add ILoveCandy
+
+    # UseSyslos is self explanatory
+    # Color adds color, making the terminal more readable
+    # VerbosePkgLists makes pacman show full list of dependencies and associations
+    # ParallelDownloads is self explanatory
+    # ILoveCandy adds a little candy graphic in loading bars
+
+    sudo pacman -Syu xorg xorg-init
+
+    
+
     
 
 
