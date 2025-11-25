@@ -212,3 +212,19 @@ It's meant to be extremely low resource demanding while being able to pack all t
     login
     startx # to start wm
     # s6-svc -u ~/.s6/services/dwm
+
+    # Create the directory for the service
+    SERVICE_DIR="/etc/s6/services/$SERVICE_NAME"
+    sudo mkdir -p "$SERVICE_DIR"
+    
+    # Create the run script for the service
+    sudo tee "$SERVICE_DIR/run" > /dev/null <<'EOF'
+    #!/bin/sh
+    exec startx
+    EOF
+    
+    # Make the run script executable
+    sudo chmod +x "$SERVICE_DIR/run"
+    
+    # Start the s6 service if it's not already running
+    sudo s6-svscan /etc/s6/services &
