@@ -63,7 +63,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
     basestrap /mnt base base_devel s6-base elogind-s6
     [Enter]
     Wait a while...
-    basestrap /mnt linux linux-firmware sof-firmware grub efibootmgr networkmanager networkmanager-s6 nano neofetch 
+    basestrap /mnt linux linux-firmware sof-firmware grub efibootmgr networkmanager networkmanager-s6 nano 
     [Enter]
     Wait a while...
     Congrats, Linux is officially installed.
@@ -115,7 +115,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
     grub-install --efi-directory=/boot --bootloader-id=artix /dev/sda
 
-## Modify GRUB to handle encrypted device at boot
+## Install setup GRUB to handle encrypted device at boot
 
     nano /etc/default/grub
     Next we'll add a placeholder for a UUID we'll insert afterwards
@@ -126,5 +126,9 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
     confirm everything looks alright by looking at `nano /etc/default/grub`.
 
-    
+    grub-mkconfig -o /boot/grub/grub.cfg
+
+## Enable network manager on boot
+
+    sudo pacman -S iproute2 ethtool openvpn networkmanager-openvpn networkmanager-vpn-plugin-openvpn
     
