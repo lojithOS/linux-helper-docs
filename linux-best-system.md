@@ -136,9 +136,9 @@ It's meant to be extremely low resource demanding while being able to pack all t
     touch /etc/s6/adminsv/default/contents.d/elogind
     s6-db-reload
 
-# The fun bit
+## Unlocking goodies
 
-    su lojith
+    sudo lojith
 
     sudo nano /etc/pacman.conf
     uncomment UseSyslog, Color, VerbosepkgLists, ParallelDownloads. Add ILoveCandy
@@ -149,11 +149,37 @@ It's meant to be extremely low resource demanding while being able to pack all t
     # ParallelDownloads is self explanatory
     # ILoveCandy adds a little candy graphic in loading bars
 
-    sudo pacman -Syu xorg xorg-init
+    scroll down and make sure [galaxy], [world] and [lib32] is uncommented working.
 
-    
+    Send `sudo pacman -Sy git` to unlock all the goodies.
 
-    
+## Display server stuff
 
+    sudo pacman -S xlibre-xserver xlibre-xserver-{common,devel,xvfb} xlibre-xf86-video-{amdgpu,vesa,fbdev,ati,dummy} xlibre-xf86-input-{libinput.evdev,vmmouse}
+    sudo pacman -S xorg-{xinit,xmodmap,xrandr,xsetroot,xprop}
 
+## Window Manager stuff
+
+    cd ~/
+    mkdir artix-dotfiles
+    cd artix-dotfiles/
+
+    git clone git://git.suckless.org/dwm dwm #second dwm appears intentional
+    git clone git://git.suckless.org/st
+    git clone git://git.suckless.org/dmenu
+
+    cd dwm
+    sudo make clean install
+    cd ../st
+    sudo make clean install
+    cd ../dmenu
+    sudo make clean install
+
+    cd ~
+
+    # set dwm startup on boot
+
+## Tool stuff
+
+    sudo trizen -S brave git
     
