@@ -62,7 +62,21 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
     basestrap /mnt base base_devel openrc elogind-openrc
     [Enter]
-
     Wait a while...
-
     basestrap /mnt linux linux-firmware sof-firmware grub efibootmgr networkmanager networkmanager-openrc nano neofetch 
+    [Enter]
+    Wait a while...
+    Congrats, Linux is officially installed.
+    basestrap /mnt lvm2 cryptsetup
+    [Enter]
+    Make the mount permanent with `fstabgen -U /mnt >> /mnt/etc/fstab`
+    artix-chroot /mnt
+
+## Setting up system
+
+    ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+    Confirm by sending `date`.
+    hwclock --systohc
+    nano /etc/locale.gen
+    Uncomment `en_GB.UTF-8 UTF-8`.
+    
