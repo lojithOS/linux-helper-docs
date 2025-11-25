@@ -33,6 +33,30 @@ It's meant to be extremely low resource demanding while being able to pack all t
     NAME           MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
     loop 0           7:0    0 782.3M  1 loop /run/artix/sfs/rootfs
     sda              8:0    0    83G  0 disk 
-    ├──sda1          8:1    0     1G  0 part part
-    └──sda2          8:2    0    82G  0 part part
+    ├──sda1          8:1    0     1G  0 part
+    └──sda2          8:2    0    82G  0 part
       └──cryptroot 254:0    0    82G  0 crypt
+    sr0             11:0    1 992.1M  0 rom   /run/artix/bootmnt
+
+    Finally, send `mkfs.ext4 /dev/mapper/cryptroot
+
+## Mounting file systems
+
+    mount /dev/mapper/cryptroot /mnt
+    mkdir /mnt/boot
+    mkfs.far -F 32 /dev/sda1
+    mount /dev/sda1 /mnt/boot
+    
+    confirm with `lsblk. Should look something like this.
+
+    ❯ lsblk
+    NAME           MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+    loop 0           7:0    0 782.3M  1 loop /run/artix/sfs/rootfs
+    sda              8:0    0    83G  0 disk 
+    ├──sda1          8:1    0     1G  0 part /mnt/boot
+    └──sda2          8:2    0    82G  0 part
+      └──cryptroot 254:0    0    82G  0 crypt /mnt
+    sr0             11:0    1 992.1M  0 rom   /run/artix/bootmnt
+
+## Begin installing system
+
