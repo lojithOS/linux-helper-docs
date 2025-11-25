@@ -60,10 +60,10 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
 ## Begin installing system
 
-    basestrap /mnt base base_devel openrc elogind-openrc
+    basestrap /mnt base base_devel s6-base elogind-s6
     [Enter]
     Wait a while...
-    basestrap /mnt linux linux-firmware sof-firmware grub efibootmgr networkmanager networkmanager-openrc nano neofetch 
+    basestrap /mnt linux linux-firmware sof-firmware grub efibootmgr networkmanager networkmanager-s6 nano neofetch 
     [Enter]
     Wait a while...
     Congrats, Linux is officially installed.
@@ -78,5 +78,53 @@ It's meant to be extremely low resource demanding while being able to pack all t
     Confirm by sending `date`.
     hwclock --systohc
     nano /etc/locale.gen
-    Uncomment `en_GB.UTF-8 UTF-8`.
+    Uncomment `en_GB.UTF-8`.
+    Send `locale-gen`
+    echo 'LANG="en_GB.UTF-8"' >> /etc/locale.conf
+
+    Confirm with `cat /etc/locale.conf`.
+
+    nano /etc/hostname
+    lojith
+
+    nano /etc/hosts
+    127.0.0.1        localhost
+    ::1              localhost
+    127.0.1.1        lojith.localdomain  lojith
+
+    pacman -S dhclient
+
+## User account stuff
+
+    passwd: <new password>
+    useradd -m -G wheel -s /bin/bash lojith
+    passwd lojith
+    <password>
+
+    Send `EDITOR=nano visudo`
+    Uncomment out `%wheel ALL=(ALL:ALL) ALL` and save.
+
+## Add support for encrypted root partitions and local volume management
+
+    nano /etc/mkinitcpio.conf
+    Modify the line `HOOKS=(base udev autodetect microcode modconf cms keyboard meymap consolefont block filesystems fsck)`, adding `encrypt` and `lvm2` after block.
+    Conclude by sending `sudo mkinitcpio -P`.
+
+
+## Install bootloader
+
+    grub-install --efi-directory=/boot --bootloader-id=artix /dev/sda
+
+## Modify GRUB to handle encrypted device at boot
+
+    nano /etc/default/grub
+    Next we'll add a placeholder for a UUID we'll insert afterwards
+    modify line near top `GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet", to "loglevel=3 quiet cryptdevice=UUID=LUKS_UUID_HERE:cryptroot root=UUID=ROOT_UUID_HERE"
+
+    set -i "s|LUKS_UUID_HERE|$(blkid -o value -s UUID /dev/sda2)|" /etc/default/grub
+    sed -i "s|ROOT_UUID_HERE|$(blkid -o value -s UUID /dev/mapper/cryptroot)|" /etc/default/grub
+
+    confirm everything looks alright by looking at `nano /etc/default/grub`.
+
+    
     
