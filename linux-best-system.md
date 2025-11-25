@@ -11,7 +11,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
 ## Partition
     
-    Send `dfdisk /dev/nvme0n1` them specify gpt.
+    Send `cfdisk /dev/nvme0n1` them specify gpt.
     Select [New], set the size to 1G and confirm.
     Move down to create a second.
     Select [New] again and confirm the default size, which is the remainder of the drive.
@@ -97,12 +97,12 @@ It's meant to be extremely low resource demanding while being able to pack all t
     Confirm with `cat /etc/locale.conf`.
 
     nano /etc/hostname
-    lojith
+    the-machine
 
     nano /etc/hosts
     127.0.0.1        localhost
     ::1              localhost
-    127.0.1.1        lojith.localdomain  lojith
+    127.0.1.1        the-machine.localdomain  the-machine
 
     pacman -S dhclient
 
@@ -156,7 +156,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
 
 ## Unlocking goodies
 
-    sudo lojith
+    su lojith # the-machine
 
     sudo nano /etc/pacman.conf
     uncomment UseSyslog, Color, VerbosepkgLists, ParallelDownloads. Add ILoveCandy
@@ -210,4 +210,5 @@ It's meant to be extremely low resource demanding while being able to pack all t
     reboot
 
     login
-    xstart # to start wm
+    startx # to start wm
+    # s6-svc -u ~/.s6/services/dwm
