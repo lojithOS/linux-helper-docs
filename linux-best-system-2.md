@@ -116,12 +116,19 @@
 
 # install display server
 
-    sudo pacman -S xlibre-xserver xlibre-xserver-{common,devel,xvfb} xlibre-xf86-video-{amdgpu,vesa,fbdev,ati,dummy} xlibre-xf86-input-{libinput.evdev,vmmouse}
+    sudo pacman -S xlibre-xserver xlibre-xserver-{common,devel,xvfb} xlibre-xf86-input-{libinput.evdev,vmmouse}
+    Removed: xlibre-xf86-video-{amdgpu,vesa,fbdev,ati,dummy}
+    sudo pacman -S xorg-{xinit,xmodmap,xrandr,xsetroot,xprop} --ignore xorg-server-dxmx
+    
+    # don't know if I'll need it but `xorg --ignore xorg-server-dxmx`
 
 # install login manager
 
-    sudo pacman sddm sddm-s6 
+    sudo pacman sddm sddm-s6
+    s6-rc-bundle-update add default sddm
     
 # install goodies
 
     sudo pacman -S plasma kitty librewolf
+
+    reboot
