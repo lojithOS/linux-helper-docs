@@ -36,10 +36,36 @@
 
 # Setting up system
 
-    pacman -S nano terminus-font grub efibootmgr networkmanager networkmanager-s6 
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+    # Set system time
+    ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+    Confirm by sending `date`.
+    hwclock --systohc
+    nano /etc/locale.gen
+        Uncomment `en_GB.UTF-8`.
+    locale-gen
+    echo 'LANG="en_GB.UTF-8"' >> /etc/locale.conf
+    
+    Confirm with `cat /etc/locale.conf`.
 
+    # Specify the keyboard layout for the console
+    nano /etc/vconsole.conf
+        KEYMAP=uk
+        FONT=ter-d14b
+
+    pacman -S nano terminus-font grub efibootmgr networkmanager networkmanager-s6
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=artix
+
+    nano /etc/default/grub
+    GRUB_TIMEOUT=0 #modify this from 5 to 0
     grub-mkconfig -o /boot/grub/grub.cfg
+    
+    nano /etc/hostname
+        machine
+    
+    nano /etc/hosts
+        127.0.0.1        localhost
+        ::1              localhost
+        127.0.1.1        machine.localdomain  machine
 
 # User account stuff
 
@@ -51,28 +77,29 @@
     passwd root
     <password>
 
-# Console stuff
+# Enable network manager on boot
 
-    # Specify the keyboard layout for the console
-    nano /etc/vconsole.conf
-        KEYMAP=uk
-        FONT=ter-d14b
+    touch /etc/s6/adminsv/default/contents.d/networkmanager
+    touch /etc/s6/adminsv/default/contents.d/elogind
 
-    exit # exit to system
-    reboot
+    s6-db-reload
 
-# ye
+    s6-rc-bundle add default NetworkManager elogind
 
-    su
-    <password>
-    s6-rc -u change NetworkManager
-    exit       
-    nano /etc/hostname
-        machine
+# Setup packet manager
+
+    su admin # the-machine
+
+    sudo nano /etc/pacman.conf
+    # uncomment UseSyslog, Color, VerbosepkgLists, ParallelDownloads, [galaxy], [world] and [lib32]
+
+# Back the fuck up, it's about to go down.
+
+    pacman -S timeshift
+    timeshift --create
+
+# All down hill from here
     
-    nano /etc/hosts
-        127.0.0.1        localhost
-        ::1              localhost
-        127.0.1.1        machine.localdomain  machine
-
-    reboot
+    sudo pacman -Sy 
+    sudo pacman -S git librewolf fish
+    sudo chsh -s /usr/bin/fish admin # set shell
