@@ -98,8 +98,18 @@
     pacman -S timeshift
     timeshift --create
 
-# All down hill from here
+# Update, install, and set shell
     
     sudo pacman -Sy 
-    sudo pacman -S git librewolf fish
+    sudo pacman -S fish
     sudo chsh -s /usr/bin/fish admin # set shell
+
+# install graphics drivers
+
+    sudo pacman https://archive.artixlinux.org/packages/n/nvidia-utils/nvidia-utils-570.144-1-x86_64.pkg.tar.zst
+    sudo pacman https://archive.artixlinux.org/packages/n/nvidia/nvidia-570.144-2-x86_64.pkg.tar.zst
+    sudo pacman https://archive.artixlinux.org/packages/n/nvidia-settings/nvidia-settings-570.144-1-x86_64.pkg.tar.zst
+
+# install display server
+
+    sudo pacman -S xlibre-xserver xlibre-xserver-{common,devel,xvfb} xlibre-xf86-video-{amdgpu,vesa,fbdev,ati,dummy} xlibre-xf86-input-{libinput.evdev,vmmouse}
