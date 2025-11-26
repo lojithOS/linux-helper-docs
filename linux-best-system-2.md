@@ -77,18 +77,22 @@
     passwd root
     <password>
 
+    Reboot into live environment
+
+    sudo su
+
 # Enable network manager on boot
 
-    touch /etc/s6/adminsv/default/contents.d/networkmanager
-    touch /etc/s6/adminsv/default/contents.d/elogind
-
-    s6-db-reload
-
+    ping google.com
+    
+    # enable network manager is no network connection
+    s6-rc -u change NetworkManager
+    # enable all services so they're enabled on boot
     s6-rc-bundle add default NetworkManager elogind
 
 # Setup packet manager
 
-    su admin # the-machine
+    su admin
 
     sudo nano /etc/pacman.conf
     # uncomment UseSyslog, Color, VerbosepkgLists, ParallelDownloads, [galaxy], [world] and [lib32]
@@ -113,3 +117,11 @@
 # install display server
 
     sudo pacman -S xlibre-xserver xlibre-xserver-{common,devel,xvfb} xlibre-xf86-video-{amdgpu,vesa,fbdev,ati,dummy} xlibre-xf86-input-{libinput.evdev,vmmouse}
+
+# install login manager
+
+    sudo pacman sddm sddm-s6 
+    
+# install goodies
+
+    sudo pacman -S plasma kitty librewolf
