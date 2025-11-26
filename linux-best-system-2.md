@@ -144,6 +144,13 @@
     
 # install goodies
 
-    sudo pacman -S kitty librewolf ranger dmenu
+    sudo pacman -S kitty librewolf ranger dmenu numlockx octopi htop
+
+    sudo nano ~/.xinitrc
+        numlockx on &
+        setxkbmap uk &
+        nm-applet &
+        xrandr -s 1920x1080 &
+        exec i3
 
     reboot
