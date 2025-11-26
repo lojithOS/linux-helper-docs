@@ -135,8 +135,11 @@
 
 # install login manager
 
-    sudo pacman sddm sddm-s6
-    s6-rc-bundle-update add default sddm
+    sudo pacman sddm-s6
+    # s6-rc add default sddm
+    s6-service add default sddm-srv
+    s6-service add default NetworkManager-srv
+    s6-db-reload
 
 # install window manager
 
