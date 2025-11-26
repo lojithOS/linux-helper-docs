@@ -137,9 +137,13 @@
 
     sudo pacman sddm sddm-s6
     s6-rc-bundle-update add default sddm
+
+# install window manager
+
+    sudo pacman -S i3-wm i3status i3lock
     
 # install goodies
 
-    sudo pacman -S plasma kitty librewolf ranger
+    sudo pacman -S kitty librewolf ranger dmenu
 
     reboot
