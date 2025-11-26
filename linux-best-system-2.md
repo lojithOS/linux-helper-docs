@@ -29,4 +29,11 @@
 
 # Begin installing system
 
+    basestrap /mnt base base-devel linux linux-firmware s6 elogind-s6
+    fstabgen -U /mnt >> /mnt/etc/fstab
+
+    artix-chroot /mnt
+
+# Setting up system
+
     
