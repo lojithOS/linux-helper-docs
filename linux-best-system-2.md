@@ -39,4 +39,13 @@
     pacman -S nano terminus-font grub efibootmgr networkmanager networkmanager-s6 
     grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 
+    grub-mkconfig -o /boot/grub/grub.cfg
+
+# User account stuff
+
+    useradd -mG wheel admin
+    passwd admin
+    <password>
+    EDITOR=nano visudo
+    # Uncomment out `%wheel ALL=(ALL:ALL) ALL` and save
     
