@@ -1,3 +1,14 @@
+#
+
+    Kernel:          artix
+    Init:            s6
+    WM:              i3-wm
+    Dispay:          xlibre
+    Shell:           fish
+    Login:           sddm
+    File Manager:    nemo
+    Menu             dmenu
+
 # Parititon
 
     cfdisk /dev/nvme0n1
@@ -136,7 +147,6 @@
 # install login manager
 
     sudo pacman sddm-s6
-    # s6-rc add default sddm
     s6-service add default sddm-srv
     s6-service add default NetworkManager-srv
     s6-db-reload
@@ -147,13 +157,11 @@
     
 # install goodies
 
-    sudo pacman -S kitty librewolf ranger dmenu numlockx octopi htop
+    sudo pacman -S kitty librewolf numlockx octopi htop
 
     sudo nano ~/.xinitrc
         numlockx on &
         setxkbmap uk &
-        nm-applet &
-        xrandr -s 1920x1080 &
         exec i3
-
+        
     reboot
