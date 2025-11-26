@@ -129,6 +129,6 @@
     
 # install goodies
 
-    sudo pacman -S plasma kitty librewolf
+    sudo pacman -S plasma kitty librewolf ranger
 
     reboot
