@@ -65,7 +65,7 @@ It's meant to be extremely low resource demanding while being able to pack all t
     basestrap /mnt base base-devel s6-base elogind-s6
     [Enter]
     Wait a while...
-    basestrap /mnt linux linux-firmware sof-firmware grub efibootmgr networkmanager networkmanager-s6 network-manager-applet dosfstools linux-headers nano 
+    basestrap /mnt linux linux-firmware sof-firmware grub s6 efibootmgr networkmanager networkmanager-s6 network-manager-applet dosfstools linux-headers nano 
     [Enter]
     Wait a while...
     Congrats, Linux is officially installed.
