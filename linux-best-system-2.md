@@ -48,4 +48,11 @@
     <password>
     EDITOR=nano visudo
     # Uncomment out `%wheel ALL=(ALL:ALL) ALL` and save
-    
+
+# Console stuff
+
+    # Specify the keyboard layout for the console
+    nano /etc/vconsole.conf
+        KEYMAP=uk
+        FONT=ter-d14b
+
