@@ -93,10 +93,21 @@
 # Setup packet manager
 
     su admin
+    pacman -S artix-archlinux-support
+    pacman-key --populate archlinux
+    pacman -S archlinux-mirrorlist
 
-    sudo nano /etc/pacman.conf
     # uncomment UseSyslog, Color, VerbosepkgLists, ParallelDownloads, [galaxy], [world] and [lib32]
 
+    # add the following
+        # Arch
+        [extra]
+        Include = /etc/pacman.d/mirrorlist-arch
+        [multilib]
+        Include = /etc/pacman.d/mirrorlist-arch
+    # finally...
+    sudo pacman -Sy
+    
 # Back the fuck up, it's about to go down.
 
     pacman -S timeshift
