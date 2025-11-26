@@ -8,9 +8,9 @@
 
     lsblk
     mkfs.fat -F32 /dev/nvme0n1p1
-    mkswap /dev/nvme0n1p2
-    swapon /dev/nvme0n1p2
-    mkfs.ext4 /dev/nvme0n1p3
+    mkswap        /dev/nvme0n1p2
+    swapon        /dev/nvme0n1p2
+    mkfs.ext4     /dev/nvme0n1p3
 
 # Mounting file system
     
@@ -48,6 +48,8 @@
     <password>
     EDITOR=nano visudo
     # Uncomment out `%wheel ALL=(ALL:ALL) ALL` and save
+    passwd root
+    <password>
 
 # Console stuff
 
@@ -56,3 +58,21 @@
         KEYMAP=uk
         FONT=ter-d14b
 
+    exit # exit to system
+    reboot
+
+# ye
+
+    su
+    <password>
+    s6-rc -u change NetworkManager
+    exit       
+    nano /etc/hostname
+        machine
+    
+    nano /etc/hosts
+        127.0.0.1        localhost
+        ::1              localhost
+        127.0.1.1        machine.localdomain  machine
+
+    reboot
