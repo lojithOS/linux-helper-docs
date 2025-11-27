@@ -2,12 +2,12 @@
 
     Kernel:          artix
     Init:            s6
-    WM:              i3-wm
+    WM:              xfwm4
     Dispay:          xlibre
     Shell:           fish
     Login:           sddm
     File Manager:    nemo
-    Menu             dmenu
+    Menu             rofi
 
 # Parititon
 
@@ -132,9 +132,7 @@
 
 # install graphics drivers
 
-    sudo pacman https://archive.artixlinux.org/packages/n/nvidia-utils/nvidia-utils-570.144-1-x86_64.pkg.tar.zst
-    sudo pacman https://archive.artixlinux.org/packages/n/nvidia/nvidia-570.144-2-x86_64.pkg.tar.zst
-    sudo pacman https://archive.artixlinux.org/packages/n/nvidia-settings/nvidia-settings-570.144-1-x86_64.pkg.tar.zst
+    sudo pacman -S nvidia-utils nvidia nvidia-settings
 
 # install display server
 
@@ -153,7 +151,7 @@
 
 # install window manager
 
-    sudo pacman -S i3-wm i3status i3lock
+    sudo pacman -S xfwm4 xfwm4-themes
     
 # install goodies
 
