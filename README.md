@@ -153,9 +153,9 @@
     s6-db-reload
 
     
-# install goodies
+# install
 
-    sudo pacman -S st feh librewolf numlockx octopi htop iftop file-roller udisks2 ranger
+    sudo pacman -S st feh librewolf numlockx octopi htop iftop file-roller udisks2 nemo steam pulseaudio pavucontrol
 
     echo "numlockx on &" >> ~/.xinitrc
 
