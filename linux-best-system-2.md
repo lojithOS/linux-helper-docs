@@ -5,9 +5,11 @@
     WM:              xfwm4
     Dispay:          xlibre
     Shell:           fish
+    Terminal:        kitty
     Login:           sddm
     File Manager:    nemo
     Menu             rofi
+    Wallpaper man:   feh
 
 # Parititon
 
@@ -78,6 +80,8 @@
         ::1              localhost
         127.0.1.1        machine.localdomain  machine
 
+    echo "setxkbmap uk &" >> ~/.xinitrc
+
 # User account stuff
 
     useradd -mG wheel admin
@@ -98,9 +102,13 @@
     
     # enable network manager is no network connection
     s6-rc -u change NetworkManager
+    
     # enable all services so they're enabled on boot
-    s6-rc-bundle add default NetworkManager elogind
-
+    # s6-rc-bundle add default NetworkManager elogind
+    
+    s6-service add default NetworkManager-srv
+    s6-db-reload
+    
 # Setup packet manager
 
     su admin
@@ -124,9 +132,8 @@
     pacman -S timeshift
     timeshift --create
 
-# Update, install, and set shell
+# install shell
     
-    sudo pacman -Sy 
     sudo pacman -S fish
     sudo chsh -s /usr/bin/fish admin # set shell
 
@@ -136,30 +143,26 @@
 
 # install display server
 
-    sudo pacman -S xlibre-xserver xlibre-xserver-{common,devel,xvfb} xlibre-xf86-input-{libinput.evdev,vmmouse}
-    Removed: xlibre-xf86-video-{amdgpu,vesa,fbdev,ati,dummy}
-    sudo pacman -S xorg-{xinit,xmodmap,xrandr,xsetroot,xprop} --ignore xorg-server-dxmx
-    
-    # don't know if I'll need it but `xorg --ignore xorg-server-dxmx`
+    sudo pacman -S xlibre-xserver xlibre-xserver-{common,devel,xvfb} xlibre-xf86-input-{libinput.evdev,vmmouse} xlibre-xf86-video-{vesa,fbdev,ati,dummy} xorg-{xinit,xmodmap,xrandr,xsetroot,xprop} --ignore xorg-server-dxmx
 
 # install login manager
 
     sudo pacman sddm-s6
     s6-service add default sddm-srv
-    s6-service add default NetworkManager-srv
     s6-db-reload
+
+    
+# install goodies
+
+    sudo pacman -S kitty feh librewolf numlockx octopi htop iftop file-roller udisks2
+
+    echo "numlockx on &" >> ~/.xinitrc
 
 # install window manager
 
     sudo pacman -S xfwm4 xfwm4-themes
+    echo "exec xfwm4" >> ~/.xinitrc
     
-# install goodies
+# Install 
 
-    sudo pacman -S kitty librewolf numlockx octopi htop
-
-    sudo nano ~/.xinitrc
-        numlockx on &
-        setxkbmap uk &
-        exec i3
-        
     reboot
