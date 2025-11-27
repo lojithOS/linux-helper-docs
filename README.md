@@ -2,12 +2,12 @@
 
     Kernel:          artix
     Init:            s6
-    WM:              xfwm4
+    WM:              i3
     Dispay:          xlibre
     Shell:           fish
     Terminal:        st
     Login:           sddm
-    File Manager:    ranger
+    File Manager:    thunar
     Menu             rofi
     Wallpaper man:   feh
     Compositor:      picom
@@ -152,10 +152,9 @@
     s6-service add default sddm-srv
     s6-db-reload
 
-    
 # install
 
-    sudo pacman -S st feh librewolf numlockx octopi htop iftop file-roller udisks2 nemo steam pulseaudio pavucontrol
+    sudo pacman -S st feh numlockx file-roller udisks2 thunar steam pulseaudio pavucontrol
 
     echo "numlockx on &" >> ~/.xinitrc
 
@@ -167,3 +166,11 @@
 # Install 
 
     reboot
+
+# customizing thunar
+
+    edit -> configure custom actions -> edit open terminal here -> erase everything in Command and replace it with "st" and nothing else.
+
+# xrandr
+
+    You'll probably have monitor problems, just use arandr, and set your monitors DP-0, DP-2, DP-4
