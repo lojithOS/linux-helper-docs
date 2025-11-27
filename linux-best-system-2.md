@@ -5,11 +5,12 @@
     WM:              xfwm4
     Dispay:          xlibre
     Shell:           fish
-    Terminal:        kitty
+    Terminal:        st
     Login:           sddm
-    File Manager:    nemo
+    File Manager:    ranger
     Menu             rofi
     Wallpaper man:   feh
+    Compositor:      picom
 
 # Parititon
 
@@ -154,13 +155,13 @@
     
 # install goodies
 
-    sudo pacman -S kitty feh librewolf numlockx octopi htop iftop file-roller udisks2
+    sudo pacman -S st feh librewolf numlockx octopi htop iftop file-roller udisks2 ranger
 
     echo "numlockx on &" >> ~/.xinitrc
 
 # install window manager
 
-    sudo pacman -S xfwm4 xfwm4-themes
+    sudo pacman -S xfwm4 xfwm4-themes picom
     echo "exec xfwm4" >> ~/.xinitrc
     
 # Install 
