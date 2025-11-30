@@ -14,6 +14,7 @@
 
 # Parititon
 
+    swapoff -a
     cfdisk /dev/nvme0n1
     
       200M EFI System
@@ -28,10 +29,9 @@
 
 # Mounting file system
     
-    mount /dev/nvme0n1p3 /mnt
-    mkdir /mnt/boot
-    mkdir /mnt/boot/efi
-    mount /dev/nvme0n1p1 /mnt/boot/efi
+    mount    /dev/nvme0n1p3 /mnt
+    mkdir -p /mnt/boot/efi
+    mount    /dev/nvme0n1p1 /mnt/boot/efi
 
     lsblk
         ❯ lsblk
