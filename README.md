@@ -1,16 +1,13 @@
+this readme is a bit out of date
+
 #
 
     Kernel:          artix
     Init:            s6
-    WM:              i3
+    WM:              cinnamon-session-cinammon2d
     Dispay:          xlibre
     Shell:           fish
-    Terminal:        st
-    Login:           sddm
-    File Manager:    thunar
-    Menu             rofi
-    Wallpaper man:   feh
-    Compositor:      picom
+    Terminal:        kitty
 
 # Parititon
 
@@ -146,12 +143,6 @@
 
     sudo pacman -S xlibre-xserver xlibre-xserver-{common,devel,xvfb} xlibre-xf86-input-{libinput.evdev,vmmouse} xlibre-xf86-video-{vesa,fbdev,ati,dummy} xorg-{xinit,xmodmap,xrandr,xsetroot,xprop} --ignore xorg-server-dxmx
 
-# install login manager
-
-    sudo pacman sddm-s6
-    s6-service add default sddm-srv
-    s6-db-reload
-
 # install
 
     sudo pacman -S st feh numlockx file-roller udisks2 thunar steam pulseaudio pavucontrol
@@ -174,3 +165,12 @@
 # xrandr
 
     exec --no-startup-id xrandr --output HDMI-0 --off --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-3 --off --output DP-4 --mode 1920x1080 --pos 3840x0 --rotate normal --output DP-5 --off --output HDMI-1-1 --off --output DP-1-1 --off --output DP-1-2 --off --output DP-1-3 --off
+
+# helper functions
+
+    for bundle in (s6-rc-db list bundles); echo "=== $bundle ==="; s6-rc-db contents $bundle; echo; end
+    s6-service del default sddm-srv
+    s6-service add default sddm-srv
+    s6-db-reload
+
+    List of every s6 command: ls /usr/bin/s6* 2>/dev/null || ls /bin/s6* 2>/dev/null
