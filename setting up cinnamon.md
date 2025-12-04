@@ -1,6 +1,6 @@
 # Installing preferred software
 
-    sudo pacman -S gnome-calculator xed trizen
+    sudo pacman -S gnome-calculator xed trizen steam
     trizen -S xviewer brave
 
 # Setting up keyboard shortcuts
@@ -22,3 +22,11 @@
     SUPER+b        brave / browser
     SUPER+v        vscode
     SUPER+s        steam
+
+# Startup Applications
+
+    DIY, loser.
+
+# Edit menu
+
+    
