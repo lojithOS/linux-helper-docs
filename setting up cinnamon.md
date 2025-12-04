@@ -5,13 +5,20 @@
 
 # Setting up keyboard shortcuts
 
-    === SOFTWARE ===
+    === Windows ===
+    SUPER+f        toggle fullscreen state
+    SUPER+Escape   close window 
+
+    === System ===
+    SHIFT+ALT+r    restart Cinnamon
+    SHIFT+ALT+q    log out
+    
+    === Launchers ===
     SUPER+q        terminal
-    SUPER+t        telegram
     SUPER+e        nemo
+    
+    === Custom shortcuts ===
+    SUPER+t        telegram
     SUPER+b        brave / browser
     SUPER+v        vscode
-
-    === OTHER SHIT ===
-    SUPER+ALT+r    cinnamon-dbus-command RestartCinnamon 1
-    SUPER+f        fullscreen
+    SUPER+s        steam
