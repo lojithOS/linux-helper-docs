@@ -116,6 +116,8 @@ this readme is a bit out of date
 
     # uncomment UseSyslog, Color, VerbosepkgLists, ParallelDownloads, [galaxy], [world] and [lib32]
 
+    sudo nano /etc/pacman.conf
+
     # add the following
         # Arch
         [extra]
