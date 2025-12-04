@@ -2,7 +2,9 @@
 
     sudo pacman -S gnome-calculator xed trizen steam
     trizen -S xviewer brave
-
+    sudo pacman -S flatpak
+    flatpak install flathub com.discordapp.Discord
+    
 # Setting up keyboard shortcuts
 
     === Windows ===
