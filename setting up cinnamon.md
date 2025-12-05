@@ -36,10 +36,17 @@
     SUPER+s        steam
 
 # Startup Applications
-
-    DIY, loser.
     
     Getting brave (kick) to auto start: git clone https://github.com/lojithOS/chrome-extension-start-with-sound.git
+
+# Fans
+
+    sudo pacman -S liquidctl
+    sudo liquidctl --match kraken set pump speed 79
+
+    git clone https://github.com/lojithOS/thimblefans.git
+    cd thimblefans
+    ./install.sh
 
 # Edit menu
 
