@@ -1,7 +1,17 @@
+# Uninstalling bullcrap
+
+    sudo pacman -Rsn cachyos-micro-settings micro \
+                     cachyos-zsh-config vim \
+                     cachyos-kernel-manager \
+                     cachyos-packageinstaller \
+                     alacritty \
+                     meld \
+                     btrfs-assistant
+
 # Installing preferred software
 
-    sudo pacman -S gnome-calculator xed trizen steam
-    trizen -S xviewer brave
+    sudo pacman -S gnome-calculator xed brave steam
+    
     sudo pacman -S flatpak
     flatpak install flathub com.discordapp.Discord
     
