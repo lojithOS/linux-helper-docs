@@ -50,6 +50,12 @@
     
     Getting brave (kick) to auto start: git clone https://github.com/lojithOS/chrome-extension-start-with-sound.git
 
-# Edit menu
+# Menu
+
+    Edit menu or move it to the top just to show the clock.
+
+# Monitors
+
+    Right-click desktop -> display, set refresh rate to 144 and middle monitor to primary
 
     
