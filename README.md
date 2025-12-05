@@ -176,3 +176,8 @@ this readme is a bit out of date
     s6-db-reload
 
     List of every s6 command: ls /usr/bin/s6* 2>/dev/null || ls /bin/s6* 2>/dev/null
+
+# fix trizen permissions if faulty
+
+    sudo chown -R $USER:$USER ~/.cache/trizen
+    sudo chown -R $USER:$USER ~/.config/trizen
