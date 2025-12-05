@@ -38,6 +38,8 @@
 # Startup Applications
 
     DIY, loser.
+    
+    Getting brave (kick) to auto start: git clone https://github.com/lojithOS/chrome-extension-start-with-sound.git
 
 # Edit menu
 
