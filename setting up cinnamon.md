@@ -35,10 +35,6 @@
     SUPER+v        vscode
     SUPER+s        steam
 
-# Startup Applications
-    
-    Getting brave (kick) to auto start: git clone https://github.com/lojithOS/chrome-extension-start-with-sound.git
-
 # Fans
 
     sudo pacman -S liquidctl
@@ -47,6 +43,12 @@
     git clone https://github.com/lojithOS/thimblefans.git
     cd thimblefans
     ./install.sh
+    
+# Startup Applications
+
+    add fan_control_speed, duh.
+    
+    Getting brave (kick) to auto start: git clone https://github.com/lojithOS/chrome-extension-start-with-sound.git
 
 # Edit menu
 
